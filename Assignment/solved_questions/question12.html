@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h3>
+      Find the maximum number in an array of numbers (Take a minimum of 8
+      numbers in the array).
+    </h3>
+    <p id="demo"></p>
+    <script>
+      let arr = [11, 2, 38, 5, 60, 7, 88, 9];
+      document.getElementById("demo").innerHTML = check(arr);
+      function check(a) {
+        return Math.max.apply(null, a);
+      }
+    </script>
+  </body>
+</html>

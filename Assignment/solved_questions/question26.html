@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h3>Write a Simple Calculator Program using switch Statement</h3>
+    <p id="demo"></p>
+    <script>
+      let num1 = parseInt(prompt("Enter the first number:"));
+      let num2 = parseInt(prompt("Enter the second number:"));
+      let operator = prompt("Enter the operator:");
+      let result;
+      function calculator(num1, num2, operator) {
+        switch (operator) {
+          case "+":
+            result = num1 + num2;
+            break;
+          case "-":
+            result = num1 - num2;
+            break;
+          case "*":
+            result = num1 * num2;
+            break;
+          case "/":
+            if (num2 > 0) {
+              result = num1 / num2;
+            } else {
+              result = "Cannot divide by zero";
+            }
+            break;
+          default:
+            result = "Invalid operator";
+        }
+      }
+      calculator(num1, num2, operator);
+      document.getElementById("demo").innerHTML = result;
+    </script>
+  </body>
+</html>
