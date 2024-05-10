@@ -59,20 +59,26 @@
           } else {
             switch (playerchoices) {
               case "Rock":
-                result =
-                  computerchoices === "Scissors" ? "You Win" : "You Lose";
+                result = computerchoices == "Scissors" ? "You Win" : "You Lose";
                 break;
               case "Paper":
-                result = computerchoices === "Rock" ? "You Win" : "You Lose";
+                result = computerchoices == "Rock" ? "You Win" : "You Lose";
                 break;
               case "Scissor":
-                result = computerchoices === "Paper" ? "You Win" : "You Lose";
+                result = computerchoices == "Paper" ? "You Win" : "You Lose";
                 break;
             }
           }
-          playerDisplay.textContent = `PLAYER : ${playerchoices}`;
-          computerDisplay.textContent = `COMPUTER : ${computerchoices}`;
-          resultDisplay.textContent = result;
+          // playerDisplay.textContent = `PLAYER : ${playerchoices}`;
+          // computerDisplay.textContent = `COMPUTER : ${computerchoices}`;
+          document.querySelector(
+            "#playerDisplay"
+          ).innerHTML = `PLAYER : ${playerchoices}`;
+          document.getElementById(
+            "computerDisplay"
+          ).innerHTML = `COMPUTER : ${computerchoices}`;
+          // resultDisplay.textContent = result;
+          document.getElementById("resultDisplay").innerHTML = result;
         }
       </script>
     </div>

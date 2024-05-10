@@ -6,13 +6,14 @@
     <title>Document</title>
   </head>
   <body>
-    <h3>Print the multiplication table </h3>
+    <h3>Print the multiplication table</h3>
     <p id="demo"></p>
     <script>
       let num = parseInt(prompt("Enter the number:"));
       for (let i = 1; i <= 10; i++) {
-        document.getElementById("demo").innerHTML += num * i + "<br>";
-             }
+        let a = document.getElementById("demo");
+        a.innerHTML += num * i + "<br>";
+      }
     </script>
   </body>
 </html>
