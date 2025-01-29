@@ -1,0 +1,39 @@
+import React, { useEffect, useState } from "react";
+import { Route, Routes } from "react-router-dom";
+import axios from "axios";
+
+import Header from "./Components/Header/Header";
+import Home from "./Components/Home/Home";
+import About from "./Components/About/About";
+import Contact from "./Components/Contact/Contact";
+import Products from "./Components/Products/Products";
+import Login from "./Components/Login/Login";
+import Footer from "./Components/Footer/Footer";
+
+const App = () => {
+  const [joke, setJoke] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/api")
+      .then((res) => setJoke(res.data))
+      .catch((err) => console.log(err));
+  }, []);
+  console.log(joke);
+
+  return (
+    <>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home joke={joke} />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+      <Footer />
+    </>
+  );
+};
+
+export default App;
