@@ -3,6 +3,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import { User } from "./db/user.module.js";
 import dotenv from "dotenv";
+import bcrypt from "bcrypt";
 
 const app = express();
 
@@ -15,10 +16,7 @@ app.get("/", (req, res) => {
 });
 
 mongoose
-  .connect("mongodb://localhost:27017/person", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect("mongodb://localhost:27017/person", {})
   .then(() => {
     console.log("Connected to MongoDB");
   })
@@ -31,25 +29,24 @@ app.get("/users", async (req, res) => {
   res.send(users);
 });
 
-app.get("/api", (req, res) => {
-  const jokes = [
-    {
-      id: 1,
-      joke: "Why did the chicken cross the road?",
-      punchline: "To get to the other side",
-    },
-    {
-      id: 2,
-      joke: "Why did the golfer bring two pairs of pants?",
-      punchline: "In case he got a hole in one",
-    },
-    {
-      id: 3,
-      joke: "What do you call a fish with no eyes?",
-      punchline: "Fsh",
-    },
-  ];
-  res.send(jokes);
+app.post("/registration", async (req, res) => {
+  try {
+    const { name, email, password } = req.body;
+    if (!name || !email || !password) {
+      return res.status(400).send("All input is required");
+    }
+    const userExists = await User.findOne({ email });
+    if (userExists) {
+      return res.status(400).send("User already exists");
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const newUser = new User({ name, email, password: hashedPassword });
+    await newUser.save();
+    res.status(200).send("User created successfully");
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 const PORT = process.env.PORT || 8080;
