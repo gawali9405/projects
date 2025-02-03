@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { IoIosSearch, IoMdMenu, IoMdClose } from "react-icons/io";
+import { FaShoppingCart } from "react-icons/fa";
 
-const Header = () => {
+const Header = ({count}) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
@@ -71,7 +72,6 @@ const Header = () => {
           >
             Contact
           </NavLink>
-           
           <NavLink
             to="/login"
             className={({ isActive }) =>
@@ -81,6 +81,17 @@ const Header = () => {
             }
           >
             Login
+          </NavLink> 
+          <NavLink
+            to="/cart"
+            className={({ isActive }) =>
+              isActive
+                ? "text-pink-500 font-semibold m-4 flex items-center space-x-2"
+                : "hover:text-pink-500 font-semibold transition-all duration-200 m-4 flex items-center space-x-2"
+            }
+          >
+            <FaShoppingCart className="text-2xl" /> 
+            <span className="text-lg relative bottom-3 right-2  text-red-500 ">{count}</span> 
           </NavLink>
         </div>
       </div>
