@@ -1,12 +1,9 @@
-import React from "react"; 
-import Header from './Component/Header/Header.jsx'
-
-const App = () => {
-  return (
-    <div>
-     <Header/>
-  </div>
-  )
-};
-
-export default App;
+ import React from 'react'
+ 
+ const App = () => {
+   return (
+     <div>App</div>
+   )
+ }
+ 
+ export default App
