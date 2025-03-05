@@ -91,7 +91,7 @@ const Header = ({count}) => {
             }
           >
             <FaShoppingCart className="text-2xl" /> 
-            <span className="text-lg relative bottom-3 right-2  text-red-500 ">{count}</span> 
+            <span className="text-lg relative bottom-3 right-2  text-red-500">{count}</span> 
           </NavLink>
         </div>
       </div>

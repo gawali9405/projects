@@ -11,7 +11,7 @@ import Registration from "./Components/Registration/Registration";
 import Cart from "./Components/Cart/Cart";  // Cart component import
 
 const App = () => {
-  const [count, setCount] = useState(1);
+  const [count, setCount] = useState(0);
   const [cart, setCart] = useState([]); // Cart state to hold the items
 
   const addToCart = (product) => {
