@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>counter</title>
+    <style>
+      * {
+        margin: 0%;
+        padding: 0%;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #ebeaea;
+      }
+      .container {
+        background-color: #fff;
+        padding: 15px;
+        width: 400px;
+        height: 200px;
+        border-radius: 10px;
+        box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.2);
+        text-align: center;
+      }
+      button { 
+        background-color: rgb(242, 55, 55);
+        padding: 8px 12px;
+        font-weight: bold;
+        margin-top: 50px;
+        border-radius: 8px;
+        border: 1px solid #fff;
+        cursor: pointer;
+        font-size: 16px;
+        color: rgb(43, 37, 18);
+      }
+      button:active{
+        transform: translateY(4px);
+      }
+      #result {
+        padding: 10px;
+        font-weight: bold;
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <button onclick="counts()">click me</button>
+      <div id="result"></div>
+    </div>
+    <script>
+      let count = 0;
+      function counts() {
+        count += 1;
+        document.querySelector("#result").innerHTML = ` You clicked  the button : ${count} times.`;
+      }
+    </script>
+  </body>
+</html>

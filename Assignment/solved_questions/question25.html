@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h3>
+      Write a JS program to check whether the input character is vovel or
+      consonant.
+    </h3>
+    <script>
+      let text = prompt("Enter the alphabet :");
+      const array = ['a','e','o','i','u'];
+      for (let i = 0; i < array.length; i++) {
+        text = text.toLocaleLowerCase();
+        if (text == array[i]) {
+          alert("vovel");
+          break;
+        } else {
+          alert("consonat");
+        }
+      }
+    </script>
+  </body>
+</html>

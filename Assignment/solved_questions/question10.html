@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h3>Create a function that receives an array of numbers and returns an array containing only the positive numbers.</h3>
+    <p>Input Array : [<span id="user"></span>]</p>
+    <p>Output Array : [<span id="demo"></span>]</p>
+    <script>
+      let age = prompt("Enter the  array numbers which is seperated by ',' including  negative numbers");
+      let arr = age.split(",");
+      document.getElementById("user").innerHTML = arr;
+      let newarray = arr.filter(check);
+
+      function check(value) {
+        return value >= 0;
+      }
+      document.getElementById("demo").innerHTML = newarray;
+    </script>
+  </body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>change_color</title>
+ <link rel="stylesheet" href="style.css">
+ <style>
+    *{
+   margin: 0%;
+   padding: 0%;
+   box-sizing: border-box;
+}
+body{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 100vh;
+}
+button{
+   background-color: rgb(53, 44, 232);
+   color: #fff;
+   padding: 10px;
+   border-radius: 10px;
+   border: #fff;
+   font-size: 16px;
+   cursor: pointer;
+}
+ </style>
+</head>
+<body>
+ <div class="div1">
+   <button onclick="change()">change_color</button>
+ </div>
+ <script>
+   function change(){
+   const array =["red","orange","yellow","green","blue","indigo","violet"];
+   let result= array[ Math.floor(Math.random()*7)];
+   console.log(result);
+   document.querySelector("body").style.backgroundColor=result;
+   }
+
+ </script>
+</body>
+</html>
