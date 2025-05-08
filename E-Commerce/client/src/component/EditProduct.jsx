@@ -12,7 +12,7 @@ const EditProduct = () => {
   const [editMode, setEditMode] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
 
-  const handleEdit = (product) => {
+  const handleEdit = (product) => { 
     setSelectedProduct(product);
     setEditMode(true);
   };

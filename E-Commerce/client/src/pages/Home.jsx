@@ -20,7 +20,7 @@ const Home = () => {
   return (
     <section className="pt-15">
       {/* Slider */}
-      <div className="w-full h-[300px] overflow-hidden relative">
+      <div className="w-full h-[450px] overflow-hidden relative">
         <img
           src={sliderImages[currentSlide]}
           alt={`Slide ${currentSlide + 1}`}

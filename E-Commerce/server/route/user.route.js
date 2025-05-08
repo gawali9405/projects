@@ -95,6 +95,7 @@ userRouter.post("/sign-in", async (req, res) => {
         id: userEmail._id,
         name: userEmail.name,
         email: userEmail.email,
+        role:userEmail.role,
       },
       process.env.SECRET_KEY,
       { expiresIn: "8d" }

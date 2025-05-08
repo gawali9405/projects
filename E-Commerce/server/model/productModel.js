@@ -7,7 +7,7 @@ const productSchema = new mongoose.Schema(
       default: "",
     },
     price: {
-      type: Number,
+      type: String,
       required: true,
     },
     name: {
@@ -21,7 +21,7 @@ const productSchema = new mongoose.Schema(
       type: String,
     },
     rating: {
-      type: Number,
+      type: String,
       default: 0,
     },
   },

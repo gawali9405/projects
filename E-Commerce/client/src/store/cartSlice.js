@@ -15,9 +15,11 @@ const cartSlice = createSlice({
       const existingItem = state.cartItems.find(i => i._id === item._id);
 
       if (existingItem) {
+        // Increment quantity and update total price
         existingItem.quantity += 1;
-        existingItem.totalPrice += existingItem.price;
+        existingItem.totalPrice = existingItem.price * existingItem.quantity;
       } else {
+        // Add new item to cart
         state.cartItems.push({
           ...item,
           quantity: 1,
@@ -25,6 +27,7 @@ const cartSlice = createSlice({
         });
       }
 
+      // Update the total quantity and total amount
       state.totalQuantity += 1;
       state.totalAmount += item.price;
     },
@@ -34,8 +37,11 @@ const cartSlice = createSlice({
       const existingItem = state.cartItems.find(i => i._id === itemId);
 
       if (existingItem) {
+        // Reduce the total quantity and total amount
         state.totalQuantity -= existingItem.quantity;
         state.totalAmount -= existingItem.totalPrice;
+
+        // Remove the item from the cart
         state.cartItems = state.cartItems.filter(i => i._id !== itemId);
       }
     },
@@ -45,12 +51,16 @@ const cartSlice = createSlice({
       const item = state.cartItems.find(i => i._id === id);
 
       if (item && quantity > 0) {
-        const quantityDiff = quantity - item.quantity;
+        const oldTotalPrice = item.totalPrice;
+        const oldQuantity = item.quantity;
+
+        // Update quantity and total price
         item.quantity = quantity;
         item.totalPrice = item.price * quantity;
 
-        state.totalQuantity += quantityDiff;
-        state.totalAmount += quantityDiff * item.price;
+        // Update totalQuantity and totalAmount based on the difference
+        state.totalQuantity += quantity - oldQuantity;
+        state.totalAmount += item.totalPrice - oldTotalPrice;
       }
     },
 

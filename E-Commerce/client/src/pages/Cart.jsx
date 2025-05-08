@@ -5,10 +5,10 @@ import { useNavigate } from "react-router-dom";
 import { updateAddress } from "../store/addrssSlice.js";
 import toast from "react-hot-toast";
 
-const Cart = ({setRefresh}) => {
+const Cart = ({ setRefresh }) => {
   const userAddress = useSelector((state) => state.address.userAddress);
   // console.log("delivery address",userAddress);
-  
+
   const [newAddress, setNewAddress] = useState({
     streetAddress: userAddress[0]?.streetAddress || "",
     city: userAddress[0]?.city || "",
@@ -27,8 +27,8 @@ const Cart = ({setRefresh}) => {
   const handleSave = () => {
     dispatch(updateAddress(newAddress));
     setEditMode(false);
-    toast.success("Delivery address Updated successfully")
-    setRefresh((prev)=>!prev)
+    toast.success("Delivery address Updated successfully");
+    setRefresh((prev) => !prev);
   };
 
   return (
@@ -136,9 +136,9 @@ const Cart = ({setRefresh}) => {
               <p className="text-gray-700 mb-2">
                 <span className="font-semibold">Total Items:</span>{" "}
                 {totalQuantity}
-              </p>
+              </p> 
               <p className="text-green-700 text-lg font-bold mb-4">
-                Total Amount: ₹{totalAmount.toFixed(2)}
+                Total Amount: ₹{(Number(totalAmount) || 0).toFixed(2)}
               </p>
 
               <button

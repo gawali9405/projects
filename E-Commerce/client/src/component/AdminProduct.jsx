@@ -15,6 +15,7 @@ const AdminProduct = ({ product, onClose }) => {
   });
   const [loading, setLoading] = useState(false);
 
+  // Set form values and image preview on initial load
   useEffect(() => {
     if (product) {
       setEditProduct({
@@ -28,6 +29,7 @@ const AdminProduct = ({ product, onClose }) => {
     }
   }, [product]);
 
+  // Handle file selection
   const handleImage = (e) => {
     const file = e.target.files[0];
     setImage(file);
@@ -36,6 +38,7 @@ const AdminProduct = ({ product, onClose }) => {
     }
   };
 
+  // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setEditProduct((prev) => ({
@@ -44,7 +47,8 @@ const AdminProduct = ({ product, onClose }) => {
     }));
   };
 
-  const handleSubmitProduct = async (e) => {
+  // Submit form
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
@@ -58,10 +62,19 @@ const AdminProduct = ({ product, onClose }) => {
         formData.append("image", image);
       }
 
-      const token = localStorage.getItem("token");
+      console.log("formdata", formData);
 
+      // Log formData entries for debugging
+      for (let pair of formData.entries()) {
+        console.log(pair[0] + ": " + pair[1]);
+      }
+
+      const token = localStorage.getItem("token");
+      console.log("token",token);
+      
+
+      // Send PUT request to update product
       if (product?._id) {
-        // Update product
         await axios.put(
           `http://localhost:8000/user/update-product/${product._id}`,
           formData,
@@ -73,7 +86,9 @@ const AdminProduct = ({ product, onClose }) => {
           }
         );
         toast.success("Product updated successfully!");
-      } 
+      }
+
+      // Reset form
       setEditProduct({
         name: "",
         title: "",
@@ -85,19 +100,20 @@ const AdminProduct = ({ product, onClose }) => {
       setImage(null);
       if (onClose) onClose();
     } catch (error) {
-      console.error("Error uploading product:", error);
-      toast.error("Failed to upload product.");
+      console.error("Error updating product:", error.message);
+      toast.error("Failed to update product.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <section className="absolute rounded-sm  top-0 left-0 bottom-0 right-0 flex justify-center items-center bg-neutral-900/60">
-      <div className="w-full max-w-xl mx-auto bg-white px-5 py-1">
+    <section className="absolute top-0 left-0 bottom-0 right-0 flex justify-center items-center bg-neutral-900/60">
+      <div className="w-full max-w-xl bg-white p-6 rounded shadow">
         <h1 className="text-2xl font-bold text-center mb-6">
           {product ? "Edit Product" : "Upload Product"}
         </h1>
+
         <div className="w-fit mx-auto text-center">
           {preview ? (
             <div className="mb-4">
@@ -140,29 +156,29 @@ const AdminProduct = ({ product, onClose }) => {
           )}
         </div>
 
-        <form onSubmit={handleSubmitProduct} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
           {["name", "title", "price", "rating", "description"].map((field) => (
-            <div key={field} className="grid gap-1">
-              <label htmlFor={field} className="font-medium capitalize">
+            <div key={field}>
+              <label className="block font-medium mb-1 capitalize">
                 {field}
               </label>
               <input
-                type="text"
                 id={field}
+                type="text"
                 name={field}
-                placeholder={`Enter your product ${field}`}
                 value={editProduct[field]}
                 onChange={handleChange}
-                className="border border-gray-300 rounded px-3 py-2"
+                className="w-full border px-3 py-2 rounded"
+                placeholder={`Product ${field}`}
                 required
               />
             </div>
           ))}
 
-          <div className="pt-4 flex justify-between items-center gap-3">
+          <div className="pt-4 flex justify-between gap-3">
             <button
               type="submit"
-              className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition duration-200"
+              className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
               disabled={loading}
             >
               {loading
@@ -174,10 +190,12 @@ const AdminProduct = ({ product, onClose }) => {
                 : "Upload Product"}
             </button>
             <button
-            onClick={()=>onClose()}
-            className="w-full bg-gray-600 text-white py-2 rounded hover:bg-gray-700 transition duration-200"
-            
-            >Cancel</button>
+              type="button"
+              onClick={onClose}
+              className="w-full bg-gray-600 text-white py-2 rounded hover:bg-gray-700 transition"
+            >
+              Cancel
+            </button>
           </div>
         </form>
       </div>
