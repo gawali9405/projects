@@ -13,11 +13,13 @@ productRouter.post(
   upload.single("image"),
   async (req, res) => {
     try {
-      const { id } = req.headers;
-      const user = await User.findById(id);
+      const { userid } = req.headers;
+      console.log("bamcke ",userid);
+      
+      const user = await User.findById(userid); 
 
       if (!user) {
-        return res.status(400).json({
+        return res.status(400).json({ 
           message: "Unauthorized access",
         });
       }
@@ -140,34 +142,28 @@ productRouter.put(
   }
 );
 
-
 // delete product
 productRouter.delete(
-  "/delete-product",
+  "/delete-product/:productid",
   userAuthentication,
   async (req, res) => {
     try {
-      const { id, productid } = req.headers;
+      const userId = req.user.id; // Assuming `userAuthentication` middleware sets req.user
+      const { productid } = req.params;
 
-      const user = await User.findById(id);
+      const user = await User.findById(userId);
       if (!user) {
-        return res.status(401).json({
-          message: "Unauthorized Access",
-        });
+        return res.status(401).json({ message: "Unauthorized Access" });
       }
 
       if (user.role !== "admin") {
-        return res.status(403).json({
-          message: "You are not Admin",
-        });
+        return res.status(403).json({ message: "You are not Admin" });
       }
 
       const deleteProduct = await Product.findByIdAndDelete(productid);
 
       if (!deleteProduct) {
-        return res.status(404).json({
-          message: "Product not found",
-        });
+        return res.status(404).json({ message: "Product not found" });
       }
 
       return res.status(200).json({
@@ -184,6 +180,7 @@ productRouter.delete(
     }
   }
 );
+
 
 
 export default productRouter;

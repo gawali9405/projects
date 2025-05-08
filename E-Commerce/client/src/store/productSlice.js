@@ -9,8 +9,11 @@ const productSlice = createSlice({
     setProducts: (state, action) => {
       state.products = action.payload;
     },
+    removeProduct: (state) => {
+      state.products = [];
+    },
   },
 });
 
-export const { setProducts } = productSlice.actions;
+export const { setProducts, removeProduct } = productSlice.actions;
 export default productSlice.reducer;
